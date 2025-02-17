@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { TextField, Button, Typography, Container, Box } from '@mui/material';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -30,40 +31,60 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form className="bg-white p-6 rounded-lg shadow-lg" onSubmit={handleLogin}>
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-2">Email:</label>
-          <input
-            type="email"
+    <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#f5f5f5', borderRadius: 2, padding: 3 }}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Typography variant="h5" gutterBottom sx={{ color: '#1976d2' }}>Login</Typography>
+        {error && <Typography color="error" variant="body2" sx={{ marginBottom: 2 }}>{error}</Typography>}
+        <form onSubmit={handleLogin} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             id="email"
-            className="border border-gray-300 p-2 w-full"
+            label="Email"
+            name="email"
+            autoComplete="email"
+            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            sx={{ marginBottom: 2 }}
           />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="senha" className="block mb-2">Senha:</label>
-          <input
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="senha"
+            label="Senha"
             type="password"
             id="senha"
-            className="border border-gray-300 p-2 w-full"
+            autoComplete="current-password"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
-            required
+            sx={{ marginBottom: 3 }}
           />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-lg w-full"
-        >
-          Entrar
-        </button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              backgroundColor: '#1976d2',
+              '&:hover': {
+                backgroundColor: '#1565c0',
+              },
+            }}
+          >
+            Entrar
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 };
 
